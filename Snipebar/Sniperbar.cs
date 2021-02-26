@@ -19,47 +19,34 @@ namespace Sniperbar
             var textRect = center;
             textRect.Y -= 15;
 
-            var castbar_w = 240; //add setting increase with the power of 6 for even number so the bar is aligned with background
-            var castbar_h = 10; //add setting
-            var castbar_part = castbar_w / 6;
+            var set_castbar_w = Settings.Size_W.Value;
+            var set_castbar_h = Settings.Size_H.Value;
+            var set_castbar_part_w = set_castbar_w / 6;
 
-            if (Settings.MyCheckboxOption)
+            string[] fontstage = { "consolab:13", "consolab:16", "consolab:18", "consolab:20", "consolab:22", "consolab:24" };
+            Color[] colorstage = { Color.Yellow, Color.Yellow, Color.Orange, Color.Orange, Color.OrangeRed, Color.Red };
+
+
+            if (Settings.Enable)
             {
-                if (buffs.Exists(b => b.Name == "snipe_stacks" && b.Charges == 1))
+                for (int i = 0; i < 6; i++)
                 {
-                    Graphics.DrawBox(new RectangleF(scrRect.X - 2 - (castbar_part * 3) + scrRect.Width / 2, scrRect.Height - 500 - 2, castbar_w + 4, castbar_h + 4), Color.Black);
-                    Graphics.DrawBox(new RectangleF(scrRect.X - (castbar_part * 3) + scrRect.Width / 2, scrRect.Height - 500, castbar_part * 1, castbar_h), Color.Yellow);
-                    Graphics.DrawText("1", textRect, Color.Yellow, "consolab:13", FontAlign.Center);
-                }
-                if (buffs.Exists(b => b.Name == "snipe_stacks" && b.Charges == 2))
-                {
-                    Graphics.DrawBox(new RectangleF(scrRect.X - 2 - (castbar_part * 3) + scrRect.Width / 2, scrRect.Height - 500 - 2, castbar_w + 4, castbar_h + 4), Color.Black);
-                    Graphics.DrawBox(new RectangleF(scrRect.X - (castbar_part * 3) + scrRect.Width / 2, scrRect.Height - 500, castbar_part * 2, castbar_h), Color.Yellow);
-                    Graphics.DrawText("2", textRect, Color.Yellow, "consolab:16", FontAlign.Center);
-                }
-                if (buffs.Exists(b => b.Name == "snipe_stacks" && b.Charges == 3))
-                {
-                    Graphics.DrawBox(new RectangleF(scrRect.X - 2 - (castbar_part * 3) + scrRect.Width / 2, scrRect.Height - 500 - 2, castbar_w + 4, castbar_h + 4), Color.Black);
-                    Graphics.DrawBox(new RectangleF(scrRect.X - (castbar_part * 3) + scrRect.Width / 2, scrRect.Height - 500, castbar_part * 3, castbar_h), Color.Orange);
-                    Graphics.DrawText("3", textRect, Color.Orange, "consolab:18", FontAlign.Center);
-                }
-                if (buffs.Exists(b => b.Name == "snipe_stacks" && b.Charges == 4))
-                {
-                    Graphics.DrawBox(new RectangleF(scrRect.X - 2 - (castbar_part * 3) + scrRect.Width / 2, scrRect.Height - 500 - 2, castbar_w + 4, castbar_h + 4), Color.Black);
-                    Graphics.DrawBox(new RectangleF(scrRect.X - (castbar_part * 3) + scrRect.Width / 2, scrRect.Height - 500, castbar_part * 4, castbar_h), Color.Orange);
-                    Graphics.DrawText("4", textRect, Color.Orange, "consolab:20", FontAlign.Center);
-                }
-                if (buffs.Exists(b => b.Name == "snipe_stacks" && b.Charges == 5))
-                {
-                    Graphics.DrawBox(new RectangleF(scrRect.X - 2 - (castbar_part * 3) + scrRect.Width / 2, scrRect.Height - 500 - 2, castbar_w + 4, castbar_h + 4), Color.Black);
-                    Graphics.DrawBox(new RectangleF(scrRect.X - (castbar_part * 3) + scrRect.Width / 2, scrRect.Height - 500, castbar_part * 5, castbar_h), Color.OrangeRed);
-                    Graphics.DrawText("5", textRect, Color.OrangeRed, "consolab:22", FontAlign.Center);
-                }
-                if (buffs.Exists(b => b.Name == "snipe_stacks" && b.Charges == 6))
-                {
-                    Graphics.DrawBox(new RectangleF(scrRect.X - 2 - (castbar_part * 3) + scrRect.Width / 2, scrRect.Height - 500 - 2, castbar_w + 4, castbar_h + 4), Color.Black);
-                    Graphics.DrawBox(new RectangleF(scrRect.X - (castbar_part * 3) + scrRect.Width / 2, scrRect.Height - 500, castbar_part * 6, castbar_h), Color.Red);
-                    Graphics.DrawText("6", textRect, Color.Red, "consolab:24", FontAlign.Center);
+                    if (buffs.Exists(b => b.Name == "snipe_stacks" && b.Charges == (i + 1)))
+                    {
+                        if (Settings.Bar)
+                        {
+                            Graphics.DrawBox(new RectangleF(scrRect.X - 2 - (set_castbar_part_w * 3) + scrRect.Width / 2, scrRect.Height - 500 - 2, set_castbar_w + 4, set_castbar_h + 4), Color.Black);
+                            Graphics.DrawBox(new RectangleF(scrRect.X - (set_castbar_part_w * 3) + scrRect.Width / 2, scrRect.Height - 500, set_castbar_part_w * (i + 1), set_castbar_h), colorstage[i]);
+                        }
+                        if (Settings.Count) 
+                        {
+                            if (Settings.Shadow)
+                            {
+                                Graphics.DrawText((i + 1).ToString(), textRect + 2, Color.Black, fontstage[i], FontAlign.Center); //Shadow
+                            }                        
+                            Graphics.DrawText((i + 1).ToString(), textRect, colorstage[i], fontstage[i], FontAlign.Center);
+                        }
+                    }
                 }
             }
         }
