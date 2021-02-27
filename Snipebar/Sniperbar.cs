@@ -19,9 +19,9 @@ namespace Sniperbar
             var textRect = center;
             textRect.Y -= 15;
 
-            var set_castbar_w = Settings.Size_W.Value;
-            var set_castbar_h = Settings.Size_H.Value;
-            var set_castbar_part_w = set_castbar_w / 6;
+            int set_castbar_w = Settings.Size_W.Value;
+            int set_castbar_h = Settings.Size_H.Value;
+            int set_castbar_part_w = set_castbar_w / 6;
 
             string[] fontstage = { "consolab:13", "consolab:16", "consolab:18", "consolab:20", "consolab:22", "consolab:24" };
             Color[] colorstage = { Color.Yellow, Color.Yellow, Color.Orange, Color.Orange, Color.OrangeRed, Color.Red };

@@ -12,27 +12,27 @@ namespace Sniperbar
             Shadow = new ToggleNode(true);
             Count = new ToggleNode(true);
             Bar = new ToggleNode(true);
-            Size_W = new RangeNode<float>(240, 60, 480);
-            Size_H = new RangeNode<float>(10, 5, 20);
+            Size_W = new RangeNode<int>(240, 60, 480);
+            Size_H = new RangeNode<int>(10, 5, 50);
         }
         //public ToggleNode Enable { get; set; } = new ToggleNode(true);
 
-        [Menu("Enabled", "Draw sniper count")]
+        [Menu("Enabled", "Enable plugin")]
         public ToggleNode Enable { get; set; }
 
-        [Menu("Shadow", "Draw Shadow on count")]
+        [Menu("Text Shadow", "Draw a shadow on the text")]
         public ToggleNode Shadow { get; set; }
 
         [Menu("Stack Counter", "Draw Stack Count")]
         public ToggleNode Count { get; set; }
 
-        [Menu("Sniper Bar", "Draw Stack Count")]
+        [Menu("Sniper Bar", "Draw a bar")]
         public ToggleNode Bar { get; set; }
 
-        [Menu("Size Width")]
-        public RangeNode<float> Size_W { get; set; }
+        [Menu("Size Width", "Width of the bar")]
+        public RangeNode<int> Size_W { get; set; }
 
-        [Menu("Size Height")]
-        public RangeNode<float> Size_H { get; set; }
+        [Menu("Size Height", "Height of the bar")]
+        public RangeNode<int> Size_H { get; set; }
     }
 }
